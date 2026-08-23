@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IV PRODUCTION</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@200;300;400;500;600;700&family=Saira:wght@400;500;600;700&family=Cairo:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #e8e2d6;
+      --text: #111111;
+      --muted: #2c2c2c;
+      --card: rgba(255, 255, 255, 0.62);
+      --border: rgba(0, 0, 0, 0.10);
+      --accent: #111111;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* Animated wavy background */
+    .bg-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background: #e8e2d6;
+    }
+
+    .wave {
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      top: -40%;
+      left: -40%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(20,20,20,0.32) 0%, transparent 55%),
+                  radial-gradient(ellipse at 70% 60%, rgba(10,10,10,0.26) 0%, transparent 50%),
+                  radial-gradient(ellipse at 50% 20%, rgba(30,30,30,0.20) 0%, transparent 45%);
+      filter: blur(55px);
+      animation: move1 18s ease-in-out infinite alternate;
+    }
+
+    .wave2 {
+      position: absolute;
+      width: 160%;
+      height: 160%;
+      top: -30%;
+      right: -40%;
+      background: radial-gradient(ellipse at 60% 50%, rgba(0,0,0,0.28) 0%, transparent 50%),
+                  radial-gradient(ellipse at 20% 70%, rgba(15,15,15,0.18) 0%, transparent 45%);
+      filter: blur(65px);
+      animation: move2 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes move1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(8%, 6%) scale(1.08); }
+    }
+    @keyframes move2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-7%, -5%) scale(1.06); }
+    }
+
+    /* Noise overlay */
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(16px);
+      background: rgba(232, 226, 214, 0.82);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      background: transparent;
+      border: 1px solid rgba(0,0,0,0.2);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .lang-btn:hover {
+      background: #111;
+      color: #f3efe7;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+
+    .company-name {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2.8rem, 9vw, 5.8rem);
+      letter-spacing: 0.06em;
+      color: #111;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .soon {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 3.2vw, 1.5rem);
+      letter-spacing: 0.45em;
+      color: #222;
+      margin-bottom: 48px;
+      opacity: 0.85;
+    }
+
+    .cta {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #111;
+      background: transparent;
+      border: 1.5px solid #111;
+      padding: 14px 32px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta:hover {
+      background: #111;
+      color: #f3efe7;
+    }
+
+    /* Sections */
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 20px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 4vw, 1.9rem);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 26px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    }
+
+    .card p, .card li {
+      font-family: 'Saira', 'Noto Sans Arabic', sans-serif;
+      font-size: 15.5px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card li {
+      position: relative;
+      padding-right: 18px;
+      margin-bottom: 10px;
+    }
+
+    [dir="ltr"] .card li {
+      padding-right: 0;
+      padding-left: 18px;
+    }
+
+    .card li::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: #111;
+      border-radius: 50%;
+    }
+
+    [dir="ltr"] .card li::before {
+      right: auto;
+      left: 0;
+    }
+
+    .sub-title {
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: #111;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-year {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      min-width: 90px;
+      color: #111;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(0,0,0,0.08);
+      max-width: 860px;
+      margin: 10px auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px 20px 40px;
+      font-family: 'Outfit', 'Noto Sans Arabic', sans-serif;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+
+    /* Language specific font tweaks */
+    [lang="ar"] .soon {
+      letter-spacing: 0.15em;
+      font-weight: 400;
+    }
+
+    [lang="en"] body {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    [lang="ar"] body {
+      font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    }
+
+    [lang="ar"] .card p,
+    [lang="ar"] .card li,
+    [lang="ar"] .section-title,
+    [lang="ar"] .sub-title,
+    [lang="ar"] .soon,
+    [lang="ar"] .cta {
+      font-family: 'Cairo', 'Noto Sans Arabic', sans-serif;
+    }
+    [lang="ar"] .section-title {
+      font-weight: 700;
+    }
+    [lang="ar"] .sub-title {
+      font-weight: 700;
+    }
+    [lang="ar"] .card p,
+    [lang="ar"] .card li {
+      font-size: 15.5px;
+      font-weight: 500;
+    }
+
+    
+    /* Strategy reveal */
+    #strategy {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: max-height 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.9s ease,
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #strategy.open {
+      max-height: 5000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cta.clicked {
+      background: #111;
+      color: #f3efe7;
+    }
+
+    
+    /* Strategy reveal - premium motion */
+    #strategy {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(60px) scale(0.97);
+      filter: blur(8px);
+      transition: max-height 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 1.0s ease;
+      will-change: max-height, opacity, transform, filter;
+    }
+
+    #strategy.open {
+      max-height: 6000px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .cta.clicked {
+      background: #111;
+      color: #f3efe7;
+    }
+
+    /* Close strategy button */
+    .close-strategy {
+      display: none;
+      text-align: center;
+      margin: 10px auto 40px;
+      max-width: 860px;
+      padding: 0 24px;
+    }
+    #strategy.open + .close-strategy,
+    .close-strategy.show {
+      display: block;
+    }
+    .close-btn {
+      font-family: 'Outfit', 'Cairo', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #111;
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(0,0,0,0.2);
+      padding: 12px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+    .close-btn:hover {
+      background: #111;
+      color: #f3efe7;
+    }
+
+    /* Scroll to top button */
+    #scrollTop {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(17,17,17,0.88);
+      color: #fff;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 200;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+    }
+    #scrollTop.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    #scrollTop:hover {
+      background: #000;
+      transform: translateY(-3px);
+    }
+
+    [dir="ltr"] #scrollTop {
+      left: auto;
+      right: 28px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 22px 18px;
+      }
+      .timeline-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .timeline-year {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-wrap">
+    <div class="wave"></div>
+    <div class="wave2"></div>
+  </div>
+  <div class="noise"></div>
+
+  <header>
+    <div style="width:40px"></div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">English</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1 class="company-name">IV PRODUCTION</h1>
+    <div class="soon" data-ar="قريباً…" data-en="Soon…">قريباً…</div>
+    <a href="#strategy" class="cta" id="strategyBtn" onclick="revealStrategy(event)" data-ar="عرض الاستراتيجية" data-en="VIEW STRATEGY">عرض الاستراتيجية</a>
+  </section>
+
+  <!-- STRATEGY -->
+  <div id="strategy">
+
+    <!-- Vision -->
+    <div class="section">
+      <h2 class="section-title" data-ar="الرؤية" data-en="Vision">الرؤية</h2>
+      <div class="card">
+        <p data-ar="أن نكون شركة إنتاج موسيقي رائدة تُنتج أعمالاً حقيقية ومنظمة بجودة عالية، وتساهم في صناعة محتوى فني مميز يظهر على المنصات والمسابقات، ويحقق إنجازات ملموسة تُخلّد في سجل الفنانين."
+           data-en="To become a leading music production company that creates real, organized, high-quality works, contributes to distinctive artistic content on platforms and competitions, and achieves tangible accomplishments that are preserved in the artists’ records.">
+          أن نكون شركة إنتاج موسيقي رائدة تُنتج أعمالاً حقيقية ومنظمة بجودة عالية، وتساهم في صناعة محتوى فني مميز يظهر على المنصات والمسابقات، ويحقق إنجازات ملموسة تُخلّد في سجل الفنانين.
+        </p>
+      </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="section">
+      <h2 class="section-title" data-ar="الرسالة" data-en="Mission">الرسالة</h2>
+      <div class="card">
+        <p data-ar="نُنتج الأغاني والأعمال الفنية بطريقة احترافية ومنظمة، ونوفر بيئة عمل محفّزة تساعد على الإبداع، ونشارك بفعالية في المسابقات والحفلات لنحقق الجوائز ونبني سجلاً فنياً قوياً لكل مبدع معنا."
+           data-en="We produce songs and artistic works in a professional and organized manner, provide a stimulating work environment that fosters creativity, and actively participate in competitions and events to win awards and build a strong artistic record for every creator with us.">
+          نُنتج الأغاني والأعمال الفنية بطريقة احترافية ومنظمة، ونوفر بيئة عمل محفّزة تساعد على الإبداع، ونشارك بفعالية في المسابقات والحفلات لنحقق الجوائز ونبني سجلاً فنياً قوياً لكل مبدع معنا.
+        </p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Strategy -->
+    <div class="section">
+      <h2 class="section-title" data-ar="الاستراتيجية (حتى أغسطس 2028)" data-en="Strategy (Until August 2028)">الاستراتيجية (حتى أغسطس 2028)</h2>
+
+      <div class="card">
+        <div class="sub-title" data-ar="١. إعادة بناء الهوية والاسم" data-en="1. Rebuilding Identity & Name">١. إعادة بناء الهوية والاسم</div>
+        <ul>
+          <li data-ar="تغيير الاسم من شركة سونو (SUNO) للإنتاج إلى IV PRODUCTION."
+              data-en="Changing the name from SUNO Production to IV PRODUCTION.">
+            تغيير الاسم من شركة سونو (SUNO) للإنتاج إلى IV PRODUCTION.
+          </li>
+          <li data-ar="سبب الاختيار: الأعضاء المؤسسون الأساسيون أربعة (عبود، فارس، أحمد، وفهد)، واسم IV مأخوذ من الرقم أربعة بالرومانية، ويعطي طابعاً احترافياً وإبداعياً أكثر يناسب مرحلة التطوير الجديدة."
+              data-en="Reason: The core founding members are four (Abood, Fares, Ahmed, and Fahad). “IV” is the Roman numeral for four, giving a more professional and creative identity that fits the new development phase.">
+            سبب الاختيار: الأعضاء المؤسسون الأساسيون أربعة (عبود، فارس، أحمد، وفهد)، واسم IV مأخوذ من الرقم أربعة بالرومانية، ويعطي طابعاً احترافياً وإبداعياً أكثر يناسب مرحلة التطوير الجديدة.
+          </li>
+        </ul>
+
+        <div class="sub-title" data-ar="٢. تطوير عملية الإنتاج" data-en="2. Developing the Production Process">٢. تطوير عملية الإنتاج</div>
+        <ul>
+          <li data-ar="الاستمرار في إنتاج الأغاني والأعمال الموسيقية بأسلوب أكثر تنظيماً وواقعية واحترافية."
+              data-en="Continue producing songs and musical works in a more organized, realistic, and professional manner.">
+            الاستمرار في إنتاج الأغاني والأعمال الموسيقية بأسلوب أكثر تنظيماً وواقعية واحترافية.
+          </li>
+          <li data-ar="التركيز على جودة المحتوى الحقيقي."
+              data-en="Focus on the quality of real content.">
+            التركيز على جودة المحتوى الحقيقي.
+          </li>
+          <li data-ar="بناء بيئة عمل مناسبة ومحفّزة تساعد الفريق على إنتاج أعمال رائعة ومستمرة طوال فترة الاستراتيجية."
+              data-en="Build a suitable and motivating work environment that helps the team produce excellent and continuous work throughout the strategy period.">
+            بناء بيئة عمل مناسبة ومحفّزة تساعد الفريق على إنتاج أعمال رائعة ومستمرة طوال فترة الاستراتيجية.
+          </li>
+        </ul>
+
+        <div class="sub-title" data-ar="٣. نظام الجوائز والمسابقات" data-en="3. Awards & Competitions System">٣. نظام الجوائز والمسابقات</div>
+        <ul>
+          <li data-ar="جوائز شهرية: تستمر جوائز أفضل أغنية في الشهر، وتُقام بشكل بسيط بدون حفل."
+              data-en="Monthly awards: Best Song of the Month awards continue, held simply without a ceremony.">
+            جوائز شهرية: تستمر جوائز أفضل أغنية في الشهر، وتُقام بشكل بسيط بدون حفل.
+          </li>
+          <li data-ar="حفلات نهاية السنة (IV AWARDS): حفلة نهاية 2026 وحفلة نهاية 2027 تحت اسم IV AWARDS، تُوزع فيها جوائز الأعمال الموسيقية المميزة على مدار السنة."
+              data-en="Year-end ceremonies (IV AWARDS): End of 2026 and end of 2027 ceremonies under the name IV AWARDS, where awards for outstanding musical works of the year are presented.">
+            حفلات نهاية السنة (IV AWARDS): حفلة نهاية 2026 وحفلة نهاية 2027 تحت اسم IV AWARDS، تُوزع فيها جوائز الأعمال الموسيقية المميزة على مدار السنة.
+          </li>
+          <li data-ar="تُحفظ كل الجوائز (Trophies) التي يكسبها الفنانون في الصفحة الشخصية لكل فنان."
+              data-en="All trophies won by artists will be saved and displayed on each artist’s personal profile.">
+            تُحفظ كل الجوائز (Trophies) التي يكسبها الفنانون في الصفحة الشخصية لكل فنان.
+          </li>
+        </ul>
+
+        <div class="sub-title" data-ar="٤. تطوير تنظيم الفعاليات" data-en="4. Improving Event Organization">٤. تطوير تنظيم الفعاليات</div>
+        <ul>
+          <li data-ar="الاستفادة من الخبرات السابقة وإتقان العمل تحت الضغط."
+              data-en="Leverage previous experience and master working under pressure.">
+            الاستفادة من الخبرات السابقة وإتقان العمل تحت الضغط.
+          </li>
+          <li data-ar="إحداث تطور كبير وملحوظ في تنظيم الحفلات والفعاليات (خاصة IV AWARDS) من حيث التخطيط والتنفيذ والجودة خلال السنتين القادمتين."
+              data-en="Achieve significant and noticeable improvement in organizing ceremonies and events (especially IV AWARDS) in terms of planning, execution, and quality over the next two years.">
+            إحداث تطور كبير وملحوظ في تنظيم الحفلات والفعاليات (خاصة IV AWARDS) من حيث التخطيط والتنفيذ والجودة خلال السنتين القادمتين.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="section">
+      <h2 class="section-title" data-ar="الجدول الزمني الرئيسي" data-en="Main Timeline">الجدول الزمني الرئيسي</h2>
+      <div class="card">
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <p data-ar="إطلاق الهوية الجديدة + أول حفلة IV AWARDS + استمرار الجوائز الشهرية."
+             data-en="Launch of the new identity + First IV AWARDS ceremony + Continuation of monthly awards.">
+            إطلاق الهوية الجديدة + أول حفلة IV AWARDS + استمرار الجوائز الشهرية.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2027</div>
+          <p data-ar="تعزيز جودة الإنتاج + ثاني حفلة IV AWARDS + تطوير بيئة العمل."
+             data-en="Enhancing production quality + Second IV AWARDS ceremony + Developing the work environment.">
+            تعزيز جودة الإنتاج + ثاني حفلة IV AWARDS + تطوير بيئة العمل.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2028</div>
+          <p data-ar="حتى أغسطس: تقييم النتائج وتحقيق أهداف الاستراتيجية الكاملة."
+             data-en="Until August: Evaluate results and achieve the full strategy goals.">
+            حتى أغسطس: تقييم النتائج وتحقيق أهداف الاستراتيجية الكاملة.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Indicators -->
+    <div class="section">
+      <h2 class="section-title" data-ar="مؤشرات النجاح" data-en="Success Indicators">مؤشرات النجاح</h2>
+      <div class="card">
+        <ul>
+          <li data-ar="اكتمال تغيير الاسم والهوية."
+              data-en="Completion of the name and identity change.">
+            اكتمال تغيير الاسم والهوية.
+          </li>
+          <li data-ar="انتظام الجوائز الشهرية."
+              data-en="Consistency of monthly awards.">
+            انتظام الجوائز الشهرية.
+          </li>
+          <li data-ar="نجاح حفلتي IV AWARDS (2026 و2027)."
+              data-en="Success of both IV AWARDS ceremonies (2026 & 2027).">
+            نجاح حفلتي IV AWARDS (2026 و2027).
+          </li>
+          <li data-ar="تحسن ملحوظ في جودة وتنظيم الأعمال والفعاليات."
+              data-en="Noticeable improvement in the quality and organization of works and events.">
+            تحسن ملحوظ في جودة وتنظيم الأعمال والفعاليات.
+          </li>
+          <li data-ar="بناء بيئة عمل أكثر تحفيزاً وإنتاجية."
+              data-en="Building a more motivating and productive work environment.">
+            بناء بيئة عمل أكثر تحفيزاً وإنتاجية.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="close-strategy" id="closeWrap">
+    <button class="close-btn" onclick="closeStrategy()" data-ar="إغلاق الاستراتيجية" data-en="Close Strategy">إغلاق الاستراتيجية</button>
+  </div>
+
+  <button id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
+
+  <footer>
+    <span data-ar="IV PRODUCTION © 2026" data-en="IV PRODUCTION © 2026">IV PRODUCTION © 2026</span>
+  </footer>
+
+  <script>
+    let currentLang = 'ar';
+    let strategyOpened = false;
+
+    function toggleLang() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const html = document.documentElement;
+      const btn = document.getElementById('langBtn');
+
+      if (currentLang === 'en') {
+        html.setAttribute('lang', 'en');
+        html.setAttribute('dir', 'ltr');
+        btn.textContent = 'العربية';
+      } else {
+        html.setAttribute('lang', 'ar');
+        html.setAttribute('dir', 'rtl');
+        btn.textContent = 'English';
+      }
+
+      document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+      });
+    }
+
+    function revealStrategy(e) {
+      e.preventDefault();
+      const section = document.getElementById('strategy');
+      const btn = document.getElementById('strategyBtn');
+      const closeWrap = document.getElementById('closeWrap');
+
+      if (!strategyOpened) {
+        section.classList.add('open');
+        btn.classList.add('clicked');
+        closeWrap.classList.add('show');
+        strategyOpened = true;
+
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 280);
+      } else {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function closeStrategy() {
+      const section = document.getElementById('strategy');
+      const btn = document.getElementById('strategyBtn');
+      const closeWrap = document.getElementById('closeWrap');
+
+      section.classList.remove('open');
+      btn.classList.remove('clicked');
+      closeWrap.classList.remove('show');
+      strategyOpened = false;
+
+      // Scroll back to hero smoothly
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show/hide scroll-to-top button
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('scrollTop');
+      if (window.scrollY > 400) {
+        btn.classList.add('show');
+      } else {
+        btn.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
